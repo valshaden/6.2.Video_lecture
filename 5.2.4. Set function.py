@@ -30,19 +30,6 @@ def set():
         except ValueError:
             mb.showerror("Ошибка", "Неверный формат времени")
 
-def check():
-    global t
-    if t:
-        now = time.time()
-        if now >= t:
-            play_snd()
-            t = None
-    window.after(10000, check)
-
-def play_snd():
-    pygame.mixer.init()
-    pygame.mixer.music.load("reminder.mp3")
-    pygame.mixer.music.play()
 
 window = Tk()
 window.title("Напоминание")
@@ -53,6 +40,6 @@ label.pack(pady=10)
 set_button = Button(text="Установить напоминание", command=set)
 set_button.pack(pady=10)
 
-check()
+##check()
 
 window.mainloop()

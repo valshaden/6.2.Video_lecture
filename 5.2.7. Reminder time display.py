@@ -1,6 +1,8 @@
 # 5.2.3. Проект Напоминание
 # 5.2.4. Функция set
 # 5.2.5. Функция check
+# 5.2.6. Функция отключения музыки
+# 5.2.7. Отображение времени напоминания
 
 # Напоминание
 # устанавливаем pygame C:\Python\Scripts\pip install pygame
@@ -39,6 +41,11 @@ def check():
             play_snd()
             t = None
     window.after(10000, check)
+
+def play_snd():
+    pygame.mixer.init()
+    pygame.mixer.music.load("reminder.mp3")
+    pygame.mixer.music.play()
 
 window = Tk()
 window.title("Напоминание")
