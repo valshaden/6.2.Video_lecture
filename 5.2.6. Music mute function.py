@@ -10,10 +10,11 @@ from tkinter import *
 from tkinter import simpledialog as sd
 from tkinter import messagebox as mb
 import datetime
-import time
 import pygame
+import time
 
 t = None
+music = False  # Переменная для отслеживания проигрывания музыки
 
 def set():
     global t
@@ -23,14 +24,13 @@ def set():
             hour = int(rem.split(":")[0])
             minute = int(rem.split(":")[1])
             now = datetime.datetime.now()
-            print(now)
-            dt = now.replace(hour=hour, minute=minute)
-            print(dt)
+            dt = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
             t = dt.timestamp()
-            print(t)
             label.config(text=f"Напоминание установлено на: {hour:02}:{minute:02}")
         except ValueError:
             mb.showerror("Ошибка", "Неверный формат времени")
+
+
 
 def check():
     global t
@@ -42,9 +42,18 @@ def check():
     window.after(10000, check)
 
 def play_snd():
+    global music
+    music = True
     pygame.mixer.init()
-    pygame.mixer.music.load("reminder.mp3")
+    pygame.mixer.music.load("Ленинград, Uma2rman - Прасковья.mp3")
     pygame.mixer.music.play()
+
+def stop_music():
+    global music
+    if music:
+        pygame.mixer.music.stop()
+        music = False
+    label.config(text="Установить новое напоминание")
 
 window = Tk()
 window.title("Напоминание")
@@ -54,6 +63,9 @@ label.pack(pady=10)
 
 set_button = Button(text="Установить напоминание", command=set)
 set_button.pack(pady=10)
+
+stop_button = Button(text="Остановить музыку", command=stop_music)
+stop_button.pack(pady=5)
 
 check()
 
