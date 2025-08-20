@@ -40,6 +40,11 @@ def check():
             t = None
     window.after(10000, check)
 
+def play_snd():
+    pygame.mixer.init()
+    pygame.mixer.music.load("Ленинград, Uma2rman - Прасковья.mp3")
+    pygame.mixer.music.play()
+
 window = Tk()
 window.title("Напоминание")
 
